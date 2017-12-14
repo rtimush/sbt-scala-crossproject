@@ -7,7 +7,7 @@ scalacOptions := Seq("-deprecation", "-unchecked", "-feature")
 
 scriptedLaunchOpts += s"-Dplugin.version=${version.value}"
 
-crossSbtVersions := Seq("1.0.4")
+crossSbtVersions := Seq("0.13.16", "1.0.4")
 
 enablePlugins(GitVersioning)
 git.useGitDescribe := true
