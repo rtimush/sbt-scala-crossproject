@@ -4,10 +4,8 @@ lazy val check = taskKey[Unit]("check settings are applied")
 lazy val expected = settingKey[String]("expected output")
 lazy val stdout = settingKey[ByteArrayOutputStream]("run output")
 
-def equals[T](actual: T, expected: T): Unit = {
-  if (actual != expected) {
-    assert(false, s"actual: $actual, expected: $expected")
-  }
+def assertEquals[T](actual: T, expected: T): Unit = {
+  assert(actual == expected, s"actual: $actual, expected: $expected")
 }
 
 lazy val bar =
@@ -44,7 +42,7 @@ lazy val foo =
       outputStrategy := Some(CustomOutput(stdout.value)),
       check := {
         (run in Compile).toTask("").value
-        equals(stdout.value.toString.trim, expected.value)
+        assertEquals(stdout.value.toString.trim, expected.value)
       }
     )
     .scalaSettings("2.11")(
@@ -60,7 +58,7 @@ lazy val foo211 = foo.scala("2.11")
 lazy val foo212 = foo.scala("2.12")
 
 check := {
-  equals((description in bar211).value, "2.11 settings")
-  equals((description in bar212).value, "2.12 settings")
-  equals((description in bar213).value, "jvm settings")
+  assertEquals((description in bar211).value, "2.11 settings")
+  assertEquals((description in bar212).value, "2.12 settings")
+  assertEquals((description in bar213).value, "jvm settings")
 }

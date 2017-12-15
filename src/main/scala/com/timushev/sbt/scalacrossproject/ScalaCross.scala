@@ -1,12 +1,24 @@
 package com.timushev.sbt.scalacrossproject
 
-import sbt.{CrossVersion, Def, Project}
+import sbt.Keys._
+import sbt._
 import sbtcrossproject.{CrossProject, Platform}
 
 case class ScalaPlatform(version: String) extends Platform {
-  def identifier: String                = s"scala-$version"
-  def sbtSuffix: String                 = s"_${version.replace('.', '_')}"
-  def enable(project: Project): Project = project
+  def identifier: String = s"scala-$version"
+  def sbtSuffix: String  = s"_${version.replace('.', '_')}"
+  def enable(project: Project): Project =
+    project
+      .settings(
+        Seq(Compile, Test).flatMap(inConfig(_) {
+          unmanagedResourceDirectories ++= {
+            unmanagedSourceDirectories.value
+              .map(src => (src / ".." / "resources").getCanonicalFile)
+              .filterNot(unmanagedResourceDirectories.value.contains)
+              .distinct
+          }
+        })
+      )
 
   @deprecated("Will be removed", "0.3.0")
   val crossBinary: CrossVersion = CrossVersion.binary

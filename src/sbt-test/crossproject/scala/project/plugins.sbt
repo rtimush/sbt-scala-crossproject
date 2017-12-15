@@ -1,2 +1,2 @@
-val pluginVersion = sys.props.get("plugin.version").get
+val pluginVersion = sys.props("plugin.version")
 addSbtPlugin("com.timushev.sbt" % "sbt-scala-crossproject" % pluginVersion)
