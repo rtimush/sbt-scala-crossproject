@@ -23,7 +23,7 @@ This makes it possible to:
 Example
 -------
 
-```
+```scala
 // Some library code cross-built for 2.11 and 2.12
 lazy val lib =
   crossProject(ScalaPlatform("2.11"), ScalaPlatform("2.12"))
@@ -53,7 +53,7 @@ Installation
 ### Stable version
 Add the following line to your `project/plugins.sbt`:
 
-```
+```scala
 addSbtPlugin("com.timushev.sbt" % "sbt-scala-crossproject" % "0.1.0")
 ```
 
@@ -62,7 +62,7 @@ Choose one of versions available on [BinTray](https://bintray.com/rtimush/sbt-pl
 or the [latest](https://bintray.com/rtimush/sbt-plugin-snapshots/sbt-scala-crossproject/_latestVersion) one.
 Then add the following line to your `project/plugins.sbt`:
 
-```
+```scala
 resolvers += Resolver.bintrayIvyRepo("rtimush", "sbt-plugin-snapshots")
 addSbtPlugin("com.timushev.sbt" % "sbt-scala-crossproject" % "x.x.x-y+gzzzzzzz")
 ```
