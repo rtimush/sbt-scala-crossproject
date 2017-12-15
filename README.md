@@ -54,7 +54,7 @@ Installation
 Add the following line to your `project/plugins.sbt`:
 
 ```scala
-addSbtPlugin("com.timushev.sbt" % "sbt-scala-crossproject" % "0.1.0")
+addSbtPlugin("com.timushev.sbt" % "sbt-scala-crossproject" % "0.1.1")
 ```
 
 ### Snapshot version
